@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.5.15/vue.min.js"></script>
+</head>
+<body>
+<div id ="app" >
+	
+<div class = "container" >
+  <div class="jumbotron">
+  <h1 class="display-4">抽奖程序</h1>
+  <p class="lead">庆祝公司上市</p>
+  <p class="lead">
+    <button class="btn btn-primary btn-lg"  v-on:click="lucky">抽奖</button>
+        <button class="btn btn-primary btn-lg"  v-on:click="stop">停止</button>
+
+  </p>
+</div>
+
+<div class="card">
+  <div class="card-header">幸运儿</div>
+  <div class="card-body">
+    <ol v-for = " user in LuckyUsers"> {{ user.name }}</ol>
+  </div>
+</div>
+
+</div>
+</div>
+
+</body>
+<script>
+
+  var users = function(){
+    users = [];
+    for (let i = 0; i < 100; i++){
+      users.push({id : i+ 1, name : 'name' + (i + 1)});
+    }
+    return users;
+  }();
+
+  console.log(users);
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    users:users,
+  	LuckyUsers : [] ,
+    isRunning:false,
+    luckyNumber: 1
+  },
+  methods: {
+    lucky(){
+      
+      console.log("开始抽奖");
+      this.isRunning = true;
+      this.run();
+    }
+  ,
+
+  stop(){
+
+      console.log("停止");
+      console.log(this.luckyNumber);
+      this.LuckyUsers.push(this.users[this.luckyNumber]);
+      this.isRunning = false
+  },
+
+  run(){
+
+    if( !this.isRunning ){
+      return;
+    }
+
+    this.luckyNumber += 1;
+    if (this.luckyNumber >= this.users.length ) {
+      this.luckyNumber = 1;
+    }
+
+    console.log("Running");
+
+    setTimeout(this.run,1);
+
+  }
+}
+})
+
+</script>
+</html>
