@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.5.15/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reverse }}"</p>
+  <button v-on:click= "reversedMessage" > 停止 </button>
+ 
+</div>
+
+</body>
+<script>
+
+ var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello',
+    reverse: ''
+  },
+
+  methods: {
+    // 计算属性的 getter
+    reversedMessage() {
+      // `this` 指向 vm 实例
+      this.reverse = this.message.split('').reverse().join('');
+      console.log(this.message.split('').reverse().join(''));
+      console.log(this.reverse);
+
+    }
+  }
+  
+})
+
+</script>
+</html>
