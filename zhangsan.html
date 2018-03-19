@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+ <div id="app-6">
+  <h1 v-html = "a"></h1>
+  <h1>{{ a + 1 }}</h1>
+  <div v-bind:name = " 'Mr '+ name" > {{ test(name) }}</div>
+  <h1>{{ isAdmin? name:'fuck' }}</h1>
+</div>
+</div>
+
+</body>
+<script>
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+  	isAdmin: true,
+  	a : 1 ,
+  	b : '' ,
+  	name : "xiaoMing",
+  	d : [] 
+  },
+
+  methods:{
+  	test(j){
+  		return 'Mr ' + j
+  	}
+  },
+
+beforeCreate(){
+	console.log("beforeCreate");
+}
+})
+
+app6.$watch ('a',function (newValue,oldValue){
+	console.log ('newValue =' + newValue + ', oldValue =' +oldValue );
+    // 这块主要做的是，数据的存储操作。浏览器本地也可能有数据库
+    // 给用户的一个通知的操作
+    alert('newValue =' + newValue + ', oldValue =' +oldValue );
+})
+
+
+
+</script>
+</html>
